@@ -1,3 +1,8 @@
+## UAV Forge PX4 Firmware ##
+
+UCI's UAV Forge project is using the PixHawk as a flight Controller. Below is the official documentation for the PX4 FCS and Middleware. More information coming soon.
+
+
 ## PX4 Flight Control Stack and Middleware ##
 
 [![Build Status](https://travis-ci.org/PX4/Firmware.svg?branch=master)](https://travis-ci.org/PX4/Firmware) [![Coverity Scan](https://scan.coverity.com/projects/3966/badge.svg?flat=1)](https://scan.coverity.com/projects/3966?tab=overview)
