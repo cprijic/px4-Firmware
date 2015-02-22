@@ -151,6 +151,9 @@ MODULES		+= examples/px4_simple_app
 # Hardware test
 #MODULES			+= examples/hwtest
 
+# UAVForge Module
+MODULES += UAV_Forge
+
 # Generate parameter XML file
 GEN_PARAM_XML = 1
 
