@@ -3,8 +3,6 @@
 #ifndef SRC_UAV_FORGE_MAINTEST_H_
 #define SRC_UAV_FORGE_MAINTEST_H_
 
-#include "main.h"
-
 #include <nuttx/config.h>
 #include <stdio.h>
 #include <errno.h>
