@@ -3,7 +3,6 @@
 #ifndef SRC_UAV_FORGE_RCOUTPUT_H_
 #define SRC_UAV_FORGE_RCOUTPUT_H_
 
-#include <systemlib/perf_counter.h>
 #include <uORB/topics/actuator_outputs.h>
 #include <uORB/topics/actuator_armed.h>
 

@@ -1,7 +1,7 @@
 // Copyright 2015 Christopher Prijic
 
 #include "RCOutput.h"
-#include "main.h"
+#include "Hal.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -12,6 +12,8 @@
 #include <drivers/drv_pwm_output.h>
 #include <uORB/topics/actuator_direct.h>
 #include <drivers/drv_hrt.h>
+
+extern const HAL& hal;
 
 void RCOutput::init() {
     _pwm_fd = open(PWM_OUTPUT0_DEVICE_PATH, O_RDWR);
@@ -269,7 +271,7 @@ void RCOutput::_publish_actuators() {
 }
 
 void RCOutput::_timer_tick() {
-    //uint32_t now = hal.scheduler->micros();
+    uint32_t now = hal.time->micros();
 
     if ((_enabled_channels & ((1U<<_servo_count)-1)) == 0) {
         // no channels enabled
@@ -279,9 +281,9 @@ void RCOutput::_timer_tick() {
 
     // always send at least at 20Hz, otherwise the IO board may think
     // we are dead
-    //if (now - _last_output > 50000) {
-    //    _need_update = true;
-    //}
+    if (now - _last_output > 50000) {
+        _need_update = true;
+    }
 
     if (_need_update && _pwm_fd != -1) {
         _need_update = false;
@@ -295,7 +297,7 @@ void RCOutput::_timer_tick() {
         // also publish to actuator_direct
         _publish_actuators();
 
-        //_last_output = now;
+        _last_output = now;
     }
 
 update_pwm:
