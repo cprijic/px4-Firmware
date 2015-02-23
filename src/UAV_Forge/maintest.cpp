@@ -11,10 +11,12 @@
 
 const HAL& hal = HAL();
 
+InertialSensor* sensor;
+
 void setup() {
     printf("Hello, Sky!\n");
 
-    InertialSensor* sensor = InertialSensor::create();
+    sensor = InertialSensor::create();
     uint8_t num_accel = sensor->get_num_accel();
     uint8_t num_gyros = sensor->get_num_gyros();
 
