@@ -10,12 +10,24 @@ class HAL {
 private:
 protected:
 public:
+    /**
+     * The RC Output to the motors.
+     */
     RCOutput* rcout;
+
+    /**
+     * The timer handle for the pixhawk -- grab system time,
+     * or delay your progress.
+     */
     Timer*    time;
 
             HAL();
     virtual ~HAL() {}
 
+    /**
+     * Initializes the hardware abstraction layer;
+     * Prepares for use.
+     */
     void    init() const;
 };
 

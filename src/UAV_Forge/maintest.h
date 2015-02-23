@@ -3,7 +3,7 @@
 #define SRC_UAV_FORGE_MAINTEST_H_
 
 
-int setup();
+void setup();
 void loop();
 
 

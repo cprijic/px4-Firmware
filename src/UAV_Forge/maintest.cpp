@@ -11,7 +11,7 @@
 
 const HAL& hal = HAL();
 
-int setup() {
+void setup() {
     printf("Hello, Sky!\n");
 
     InertialSensor* sensor = InertialSensor::create();
@@ -20,18 +20,13 @@ int setup() {
 
     printf("#accels: %u\n", num_accel);
     printf("#gyros: %u\n", num_gyros);
-
-    for (int i = 0; i < 100000; i++) {
-        sensor->update();
-        printf("accel: %8.4f, %8.4f, %8.4f\n", (double)sensor->accel.x, (double)sensor->accel.y, (double)sensor->accel.z);
-        printf("gyro:  %8.4f, %8.4f, %8.4f\n", (double)sensor->gyro.x, (double)sensor->gyro.y, (double)sensor->gyro.z);
-    }
-
-    return OK;
 }
 
 void loop() {
     printf("Loop...\n");
+    sensor->update();
+    printf("accel: %8.4f, %8.4f, %8.4f\n", (double)sensor->accel.x, (double)sensor->accel.y, (double)sensor->accel.z);
+    printf("gyro:  %8.4f, %8.4f, %8.4f\n", (double)sensor->gyro.x, (double)sensor->gyro.y, (double)sensor->gyro.z);
 }
 
 UAV_FORGE_MAIN();
