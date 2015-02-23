@@ -9,8 +9,8 @@ class Timer {
 private:
 protected:
 public:
-    Timer() {}
-    virtual ~Timer() {}
+             Timer() {}
+    virtual  ~Timer() {}
     uint32_t millis();
     uint32_t micros();
     uint64_t millis64();

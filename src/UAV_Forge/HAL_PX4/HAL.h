@@ -13,10 +13,10 @@ public:
     RCOutput* rcout;
     Timer*    time;
 
-    HAL();
+            HAL();
     virtual ~HAL() {}
 
-    void init() const;
+    void    init() const;
 };
 
 #endif /* SRC_UAV_FORGE_HAL_PX4_HAL_H_ */

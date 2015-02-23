@@ -5,14 +5,12 @@
 
 #include <uORB/topics/actuator_outputs.h>
 #include <uORB/topics/actuator_armed.h>
-
+#include "defines.h"
 #define PX4_NUM_OUTPUT_CHANNELS 16
 
 class RCOutput {
-public:
-    typedef int ORB_HANDLE;
 private:
-    int                _pwm_fd;
+    FILE_DESC          _pwm_fd;
     uint16_t           _pwm_freq;
     uint16_t           _period[PX4_NUM_OUTPUT_CHANNELS];
     volatile uint8_t   _max_channel;
