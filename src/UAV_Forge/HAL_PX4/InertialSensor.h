@@ -27,15 +27,17 @@ private:
     FILE_DESC _accel_fd[INS_MAX_INSTANCES];
     FILE_DESC _gyro_fd[INS_MAX_INSTANCES];
 
-    uint8_t   _num_accel_instances;
-    uint8_t   _num_gyro_instances;
+    uint8_t   _num_accel_instances = 0;
+    uint8_t   _num_gyro_instances = 0;
+    uint8_t   _accepted_accel_instance = 0;
+    uint8_t   _accepted_gyro_instance = 0;
 
     uint64_t  _last_accel_timestamp[INS_MAX_INSTANCES];
     uint64_t  _last_gyro_timestamp[INS_MAX_INSTANCES];
     uint64_t  _last_accel_update_timestamp[INS_MAX_INSTANCES];
     uint64_t  _last_gyro_update_timestamp[INS_MAX_INSTANCES];
-    uint64_t  _last_get_sample_timestamp;
-    uint64_t  _last_sample_timestamp;
+    uint64_t  _last_get_sample_timestamp = 0;
+    uint64_t  _last_sample_timestamp = 0;
 
     vec3      _accel_info[INS_MAX_INSTANCES];
     vec3      _gyro_info[INS_MAX_INSTANCES];
@@ -53,8 +55,9 @@ private:
     void                   _correct_gyro(uint8_t instance, vec3 gyro);
 protected:
 public:
-                           InertialSensor() : _num_accel_instances(0), _num_gyro_instances(0),
-                                              _last_get_sample_timestamp(0), _last_sample_timestamp(0) {}
+    vec3      accel;
+    vec3      gyro;
+                           InertialSensor() {}
     virtual                ~InertialSensor() {}
 
     static InertialSensor* create();

@@ -82,28 +82,44 @@ bool InertialSensor::update()
     _get_sample();
 
     for (uint8_t k=0; k<_num_accel_instances; k++) {
-        vec3 accel = _accel_info[k];
+        vec3 accel_reading = _accel_info[k];
 
         if (_last_accel_timestamp[k] != _last_accel_update_timestamp[k]) {
-            _correct_accel(k, accel);
+            _correct_accel(k, accel_reading);
             _last_accel_update_timestamp[k] = _last_accel_timestamp[k];
         }
     }
 
     for (uint8_t k=0; k<_num_gyro_instances; k++) {
-        vec3 gyro = _gyro_info[k];
+        vec3 gyro_reading = _gyro_info[k];
 
         if (_last_gyro_timestamp[k] != _last_gyro_update_timestamp[k]) {
-            _correct_gyro(k, gyro);
+            _correct_gyro(k, gyro_reading);
             _last_gyro_update_timestamp[k] = _last_gyro_timestamp[k];
+        }
+    }
+
+    for (uint8_t k = 0; k < _num_accel_instances; k++) {
+        if (!_accel_error_count[k]) {
+            _accepted_accel_instance = k;
+            accel = _accel_corrected_info[k];
+            break;
+        }
+    }
+
+    for (uint8_t k = 0; k < _num_gyro_instances; k++) {
+        if (!_gyro_error_count[k]) {
+            _accepted_gyro_instance = k;
+            gyro = _gyro_corrected_info[k];
+            break;
         }
     }
 
     return true;
 }
 
-void InertialSensor::_correct_accel(uint8_t instance, vec3 accel) {
-    vec3 corrected_accel = accel;
+void InertialSensor::_correct_accel(uint8_t instance, vec3 accel_reading) {
+    vec3 corrected_accel = accel_reading;
     vec3 accel_scale = _accel_scale[instance];
     corrected_accel.x *= accel_scale.x;
     corrected_accel.y *= accel_scale.y;
@@ -112,8 +128,8 @@ void InertialSensor::_correct_accel(uint8_t instance, vec3 accel) {
     _accel_corrected_info[instance] = corrected_accel;
 }
 
-void InertialSensor::_correct_gyro(uint8_t instance, vec3 gyro) {
-    vec3 corrected_gyro = gyro;
+void InertialSensor::_correct_gyro(uint8_t instance, vec3 gyro_reading) {
+    vec3 corrected_gyro = gyro_reading;
     corrected_gyro -= _gyro_offset[instance];
     _gyro_corrected_info[instance] = corrected_gyro;
 }
