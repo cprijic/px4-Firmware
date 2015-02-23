@@ -26,6 +26,7 @@ void setup() {
 
 void loop() {
     printf("Loop...\n");
+    hal.time->delay(1000);
     sensor->update();
     printf("accel: %8.4f, %8.4f, %8.4f\n", (double)sensor->accel.x, (double)sensor->accel.y, (double)sensor->accel.z);
     printf("gyro:  %8.4f, %8.4f, %8.4f\n", (double)sensor->gyro.x, (double)sensor->gyro.y, (double)sensor->gyro.z);

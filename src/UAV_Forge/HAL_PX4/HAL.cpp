@@ -16,7 +16,9 @@ static int main_loop() {
     hal.rcout->init();
 
     setup();
-    loop();
+    while(true) {
+        loop();
+    }
 
     return OK;
 }

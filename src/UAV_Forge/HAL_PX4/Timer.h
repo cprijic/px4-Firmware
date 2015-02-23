@@ -39,6 +39,27 @@ public:
      * @return the time, in microseconds.
      */
     uint64_t micros64();
+
+    /**
+     * Delay's by the given microseconds, using a semaphore wait.
+     *
+     * @param usec the number of microseconds to delay for.
+     */
+    void     delay_microseconds_semaphore(uint16_t usec);
+
+    /**
+     * Delay's by the given microseconds, using a spinning semaphore.
+     *
+     * @param usec the number of microseconds to delay for.
+     */
+    void     delay_microseconds(uint16_t usec);
+
+    /**
+     * Delays for the given milliseconds.
+     *
+     * @param ms the number of milliseconds to delay for.
+     */
+    void     delay(uint64_t ms);
 };
 
 #endif /* SRC_UAV_FORGE_HAL_PX4_TIMER_H_ */
